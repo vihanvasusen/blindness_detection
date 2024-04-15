@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="file"] {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        img {
+        max-width: 100%;
+        max-height: 300px; /* Adjust the height as needed */
+        margin-top: 10px;
+        }
+
+        .grayscale {
+        filter: grayscale(100%);
+        }
+    </style>
+    <title>Diabetic Retinopathy Prediction</title>
+</head>
+<body>
+    <h1>Diabetic Retinopathy Prediction</h1>
+    
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".png, .jpg, .jpeg, .gif" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if prediction %}
+        <h2>Prediction for {{ filename }}:</h2>
+        <p>{{ prediction }}</p>
+        <p>{{ confidence }}</p>
+        <img src="{{ url_for('uploaded_file', filename=filename) }}" alt="Uploaded Image" class="grayscale">
+    {% endif %}
+</body>
+</html>
